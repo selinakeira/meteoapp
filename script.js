@@ -1,96 +1,6 @@
 /*
 
-"use strict";
-
-const dayEl = document.querySelector(".default_day");
-const dateEl = document.querySelector(".defaul_date");
-const inputEl = document.querySelector(".input_field");
-const btnEl = document.querySelector(".btn_search");
-const iconContainer = document.querySelector(".icons");
-const dayInfoEl = document.querySelector(".day_info");
-
-// API-Schlüssel für OpenWeatherMap
-const API = "7308a76037a59eb904a484dcf22e273f";
-
-// Wochentage für die Anzeige
-const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag","Sonntag"];
-
-// Aktuellen Tag und Datum festlegen und anzeigen
-const day = new Date();
-const dayName = days[day.getDay()];
-dayEl.textContent = dayName;
-let month = day.toLocaleString("default", { month: "long" });
-let date = day.getDate();
-let year = day.getFullYear();
-dateEl.textContent = date + " " + month + " " + year;
-
-// Suchknopf Ereignis
-btnEl.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (inputEl.value !== "") {
-    const Search = inputEl.value;
-    inputEl.value = "";
-    findLocation(Search);
-  } else {
-    alert("Bitte geben Sie den Namen der Stadt, des Landes ein!");
-  }
-});
-
-// Funktion zum Abrufen des aktuellen Wetters
-async function findLocation(name) {
-  try {
-    iconContainer.innerHTML = "";
-    dayInfoEl.innerHTML = "";
-    const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API}`;
-    const data = await fetch(API_URL);
-    const result = await data.json();
-
-    if (result.cod !== "404") {
-      const displayImageContent = imgContent(result);
-      const sideContent = displaySideContent(result);
-
-      setTimeout(() => {
-        iconContainer.insertAdjacentHTML("afterbegin", displayImageContent);
-        dayInfoEl.insertAdjacentHTML("afterbegin", sideContent);
-        iconContainer.classList.add("fadeIn");
-        dayInfoEl.classList.add("fadeIn");
-      }, 1500);
-    } else {
-      const Message = `<h2 class="weather_temp">${result.cod}</h2>
-                       <h3 class="cloudtxt">${result.message}</h3>`;
-      iconContainer.insertAdjacentHTML("afterbegin", Message);
-    }
-  } catch (error) {}
-}
-
-// Funktion zur Anzeige von Wetterbild und Temperatur
-function imgContent(resultData) {
-  return `<img src="https://openweathermap.org/img/wn/${resultData.weather[0].icon}@4x.png" alt=""/>
-          <h2 class="weather_temp">${Math.round(resultData.main.temp - 275.15) + "°C"}</h2>
-          <h3 class="cloudtxt">${resultData.weather[0].description}</h3>`;
-}
-
-// Funktion zur Anzeige von weiteren Wetterinformationen
-function displaySideContent(data) {
-  return `<div class="content">
-            <p class="title">Standort</p>
-            <span class="value-1">${data.name}</span>
-          </div>
-          <div class="content">
-            <p class="title">Temperatur</p>
-            <span class="value">${Math.round(data.main.temp - 275.15) + "°C"}</span>
-          </div>
-          <div class="content">
-            <p class="title">Luftfeuchtigkeit</p>
-            <span class="value">${data.main.humidity} %</span>
-          </div>
-          <div class="content">
-            <p class="title">Windgeschwindigkeit</p>
-            <span class="value">${data.wind.speed} Km/h</span>
-          </div>`;
-}
-
-*/
+VERSION 1 VON YOUTUBE
 
 "use strict";
 
@@ -177,3 +87,73 @@ function updateWeatherDisplay(hourlyData) {
                                <span class="value-2">${windSpeed} km/h</span>
                            </div>`;
 }
+
+
+*/
+
+// CODE VOM COCKTAIL-PROJEKT
+
+let suche = document.querySelector('#suche');
+let anzeige = document.querySelector('#anzeige');
+
+
+// Funktion zum Abrufen von Cocktail-Daten
+async function holeDaten(url) {
+  try {
+      let data = await fetch(url);
+      return await data.json();
+  } catch (e) {
+      console.error(e);
+  }
+}
+
+// Funktion zum Darstellen von Cocktail-Daten
+function datenDarstellen(cocktails) {
+  anzeige.innerHTML = '';
+  cocktails.forEach(cocktail => {
+      let div = document.createElement('div');
+      let image = document.createElement('img'); 
+      image.src = cocktail.strDrinkThumb;
+      let title = document.createElement('h2');
+      title.innerText = cocktail.strDrink;
+      div.appendChild(title);
+      div.appendChild(image);
+      anzeige.appendChild(div);
+  });
+}
+
+// Event-Listener für die Suche
+suche.addEventListener('input', async function () {
+  let ergebnis = suche.value;
+  let searchUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + ergebnis;
+  console.log(ergebnis);
+
+  // Hole und zeige Daten basierend auf der Suchanfrage
+
+  let cocktails_aus_suche = await holeDaten(searchUrl);
+  datenDarstellen(cocktails_aus_suche.drinks);
+  console.log (cocktails_aus_suche)
+});
+
+/*
+
+VERSION 2 VON OPENMETEO DIREKT
+
+$ curl "https://api.open-mhttps://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
+
+{
+  "current": {
+    "time": "2022-01-01T15:00",
+    "temperature_2m": 2.4,
+    "wind_speed_10m": 11.9
+  },
+  "hourly": {
+    "time": ["2022-07-01T00:00", "2022-07-01T01:00", ...],
+    "wind_speed_10m": [3.16, 3.02, 3.3, 3.14, 3.2, 2.95, ...],
+    "temperature_2m": [13.7, 13.3, 12.8, 12.3, 11.8, ...],
+    "relative_humidity_2m": [82, 83, 86, 85, 88, 88, 84, 76, ...]
+  }
+}
+
+*/
+

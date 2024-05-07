@@ -1,5 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ruda:wght@400;600;700&display=swap");
 
+/* 
+
+Farbcodes
+
+Pink: #eebec7
+Hellpink: #eed8db
+Gelb: #f5dd9e
+Gruen: #93c3ab
+Blau: #6fb9c9
+Dunkelblau: #659fab
+Dunkelblau2: #45527d
+Orange: #e69d74
+
+colors used:
+Teal: #1c4f5a
+Dunkelblau: #659fab
+*/
+
+
 /* Grundlegende Einstellungen für alle Elemente */
 * {
   box-sizing: border-box;
@@ -9,7 +28,7 @@
 
 /* Einstellungen für den Körper des Dokuments */
 body {
-  background-color: #37474f;
+  background-color: #1c4f5a;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -21,7 +40,7 @@ body {
 .container {
   max-width: 1000px;
   width: 100%;
-  background-color: #232931;
+  background-color: #659fab;
   color: #fff;
   border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -53,7 +72,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: linear-gradient(135deg, #5c6bc0 10%, #0d47a1 100%);
+  background: linear-gradient(135deg, #eed1ea 10%, rgb(233, 194, 223) 100%);
   opacity: 0.5;
   border-radius: 25px;
   z-index: -1;
@@ -102,13 +121,20 @@ body {
   width: 84%;
   outline: none;
   background: transparent;
-  border: 1px solid #37474f;
+  border: 1px solid #cfd3d5;
   border-radius: 5px;
   padding: 0.7rem 1rem;
   font-family: inherit;
   color: #fff;
   font-size: 1rem;
 }
+
+/* Weißer Text für den Platzhalter */
+.content_section form input::placeholder {
+    color: #fff;  
+    opacity: 1; 
+  }
+  
 
 .content_section form button {
   position:absolute;
@@ -121,7 +147,7 @@ body {
   font-size: 0.8rem;
   outline: none;
   border: none;
-  background-color: #5c6bc0;
+  background-color: #1c4f5a;
   color: #fff;
   cursor: pointer;
 }
