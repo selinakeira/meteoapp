@@ -101,9 +101,10 @@ const inputEl = document.querySelector(".input_field");
 const btnEl = document.querySelector(".btn_search");
 const iconContainer = document.querySelector(".icons");
 const dayInfoEl = document.querySelector(".day_info");
+const anzeigen = document.querySelector(".anzeigen");
 
 // Wochentage und Monate für die Anzeige
-const days = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag","Sonntag"];
 const months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
 // Aktuellen Tag und Datum anzeigen
@@ -135,7 +136,7 @@ btnEl.addEventListener("click", (e) => {
 async function fetchWeatherData(latitude, longitude) {
     const url = `${API_BASE_URL}?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,rain,snowfall,cloud_cover,wind_speed_10m&forecast_days=1`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(latitude, longitude);
         const data = await response.json();
         if (data.hourly) {
             updateWeatherDisplay(data.hourly);
@@ -158,7 +159,8 @@ function updateWeatherDisplay(hourlyData) {
     const windSpeed = hourlyData.wind_speed_10m[hourIndex];
 
     // Elemente im DOM aktualisieren
-    iconContainer.innerHTML = `<img src="https://openweathermap.org/img/wn/10d@4x.png" alt="" class="weather_img_icon"/>
+    // Bild-URL einfügen  
+    iconContainer.innerHTML = `<img src="xxx" alt="" class="weather_img_icon"/> 
                                <h2 class="weather_temp">${temperature} °C</h2>
                                <h3 class="cloudtxt">Wolkenbedeckung: ${cloudCover}%</h3>`;
 
