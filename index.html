@@ -1,23 +1,62 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meteo</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Stylesheet für die grundlegenden Stile -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Icon-Bibliothek für das Design -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!-- Verknüpfung zum JavaScript-Code -->
+    <title>Wetter App</title>
 </head>
 <body>
-    
-<div class="card">
-    <div class="search"></div>
-    <input type="text" placeholder="Dein Standort" spellcheck="false">
-    <button><img src="icons/webp/sonne_icon.webp"></button> 
-    <!-- TODO Anderes Icon einfügen-->
-
-
-
-
-</div>
-
+    <div class="container">
+        <div class="wrapper">
+            <div class="img_section">
+                <div class="default_info">
+                    <!-- Anzeige des aktuellen Tagesnamens -->
+                    <h2 class="default_day"></h2>
+                    <!-- Anzeige des aktuellen Datums -->
+                    <span class="defaul_date"></span>
+                    <div class="icons">
+                        <!-- Standard-Wetterbild -->
+                        <img src="https://openweathermap.org/img/wn/10d@4x.png" alt="" class="weather_img_icon" />
+                        <!-- Anzeige der Temperatur -->
+                        <h2 class="weather_temp"></h2>
+                        <!-- Beschreibung des Wetters -->
+                        <h3 class="cloudtxt"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="content_section">
+                <!-- Suchformular für die Eingabe der Stadt -->
+                <form>
+                    <input type="text" placeholder="Standort suchen" class="input_field" />
+                    <button type="submit" class="btn_search">Suchen</button>
+                </form>
+                <div class="day_info">
+                    <!-- Informationen über das aktuelle Wetter des gesuchten Ortes -->
+                    <div class="content">
+                        <p class="title">Standort</p>
+                        <span class="value-1"></span>
+                    </div>
+                    <div class="content">
+                        <p class="title">Temperatur</p>
+                        <span class="value-1"></span>
+                    </div>
+                    <div class="content">
+                        <p class="title">Luftfeuchtigkeit</p>
+                        <span class="value-2"></span>
+                    </div>
+                    <div class="content">
+                        <p class="title">Windgeschwindigkeit</p>
+                        <span class="value-2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script defer src="script.js"></script>
 </body>
 </html>
