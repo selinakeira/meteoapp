@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Stylesheet für die grundlegenden Stile -->
     <link rel="stylesheet" href="styles.css" />
-    <!-- Icon-Bibliothek für das Design -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
     <!-- Verknüpfung zum JavaScript-Code -->
-    <title>Wetter App</title>
+    <script src="script.js"></script>
+    <title>Meteo App</title>
 </head>
 <body>
     <div class="container">
@@ -17,11 +18,13 @@
                 <div class="default_info">
                     <!-- Anzeige des aktuellen Tagesnamens -->
                     <h2 class="default_day"></h2>
+                    
                     <!-- Anzeige des aktuellen Datums -->
                     <span class="defaul_date"></span>
                     <div class="icons">
+
                         <!-- Standard-Wetterbild -->
-                       <!--  TODO BILD <img src="" alt="" class="weather_img_icon" /> -->
+                        <!--  TODO BILD <img src="" alt="" class="weather_img_icon" /> -->
                         <!-- Anzeige der Temperatur -->
                         <h2 class="weather_temp"></h2>
                         <!-- Beschreibung des Wetters -->
@@ -30,12 +33,14 @@
                 </div>
             </div>
             <div class="content_section">
+
                 <!-- Suchformular für die Eingabe der Stadt -->
                 <form>
                     <input type="text" placeholder="Standort suchen" class="input_field" />
                     <button type="submit" class="btn_search">Suchen</button>
                 </form>
                 <div class="day_info">
+
                     <!-- Informationen über das aktuelle Wetter des gesuchten Ortes -->
                     <div class="content">
                         <p class="title">Standort</p>
