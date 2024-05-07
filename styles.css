@@ -19,20 +19,22 @@ body {
 
 /* Container für das Wetter-Widget */
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   background-color: #232931;
   color: #fff;
   border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   transition: all 0.5s ease-in-out;
+  padding: 60px;
 }
 
 /* Layout für die inneren Bereiche */
 .wrapper {
   display: grid;
-  grid-template-columns: 3fr 4fr;
+  grid-template-columns: 4fr 5fr;
   grid-gap: 1rem;
+  width: 100%;
 }
 
 /* Abschnitt für das Bild und die grundlegenden Wetterinformationen */

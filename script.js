@@ -90,9 +90,7 @@ function displaySideContent(data) {
           </div>`;
 }
 
-
 */
-
 
 "use strict";
 
@@ -132,7 +130,6 @@ btnEl.addEventListener("click", (e) => {
           inputEl.value = ""; 
         
 }}});
-
 
 // Funktion zum Abrufen der Wetterdaten
 async function fetchWeatherData(latitude, longitude) {
