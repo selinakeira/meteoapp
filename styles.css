@@ -38,7 +38,6 @@ body {
 /* Abschnitt für das Bild und die grundlegenden Wetterinformationen */
 .img_section {
   border-radius: 25px;
-  background-image: url("../img/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
