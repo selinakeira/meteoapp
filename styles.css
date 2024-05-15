@@ -1,34 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ruda:wght@400;600;700&display=swap");
 
-/* 
-
-Farbcodes
-
-Pink: #eebec7
-Hellpink: #eed8db
-Gelb: #f5dd9e
-Gruen: #93c3ab
-Blau: #6fb9c9
-Dunkelblau: #659fab
-Dunkelblau2: #45527d
-Orange: #e69d74
-
-colors used:
-Teal: #1c4f5a
-Dunkelblau: #659fab
-*/
-
-
-/* Grundlegende Einstellungen für alle Elemente */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Einstellungen für den Körper des Dokuments */
 body {
-  background-color: #1c4f5a;
+  background-color: #37474f;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -36,29 +15,25 @@ body {
   font-family: "poppins";
 }
 
-/* Container für das Wetter-Widget */
 .container {
-  max-width: 1000px;
+  max-width: 800px;
   width: 100%;
-  background-color: #659fab;
+  background-color: #232931;
   color: #fff;
   border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   transition: all 0.5s ease-in-out;
-  padding: 60px;
 }
 
-/* Layout für die inneren Bereiche */
 .wrapper {
   display: grid;
-  grid-template-columns: 4fr 5fr;
+  grid-template-columns: 3fr 4fr;
   grid-gap: 1rem;
-  width: 100%;
 }
 
-/* Abschnitt für das Bild und die grundlegenden Wetterinformationen */
 .img_section {
   border-radius: 25px;
+  background-image: url("../img/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -66,25 +41,43 @@ body {
   transform: scale(1.03) perspective(200px);
 }
 
-/* Überlagerungseffekt für das Bild */
 .img_section::before {
   content: "";
   width: 100%;
   height: 100%;
   position: absolute;
-  background: linear-gradient(135deg, #eed1ea 10%, rgb(233, 194, 223) 100%);
-  opacity: 0.5;
+  background: linear-gradient(135deg, #5c6bc0 10%, #0d47a1 100%);
+  opacity: 1;
   border-radius: 25px;
   z-index: -1;
 }
 
-/* Zentrierung und Formatierung des Standard-Info-Bereichs */
 .default_info {
   padding: 1.5rem;
   text-align: center;
 }
 
-/* Stile für die Symbole */
+.default_info img {
+  width: 80%;
+  object-fit: cover;
+  margin: 0 auto;
+  transition: all 0.3s ease-in;
+}
+
+.default_info h2 {
+  font-size: 3rem;
+}
+
+.default_info h3 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.weather_temp {
+  font-size: 4rem;
+  font-weight: 800;
+}
+
 .icons {
   opacity: 0.6;
 }
@@ -101,7 +94,7 @@ body {
   }
 }
 
-/* Rechter Bereich für weitere Wetterdaten */
+/* right side content */
 .content_section {
   padding: 1.5rem;
 }
@@ -111,7 +104,6 @@ body {
   animation-delay: 0.7s;
 }
 
-/* Formularstil */
 .content_section form {
   position: relative;
   margin: 1.5rem 0;
@@ -121,7 +113,7 @@ body {
   width: 84%;
   outline: none;
   background: transparent;
-  border: 1px solid #cfd3d5;
+  border: 1px solid #37474f;
   border-radius: 5px;
   padding: 0.7rem 1rem;
   font-family: inherit;
@@ -129,17 +121,10 @@ body {
   font-size: 1rem;
 }
 
-/* Weißer Text für den Platzhalter */
-.content_section form input::placeholder {
-    color: #fff;  
-    opacity: 1; 
-  }
-  
-
 .content_section form button {
-  position:absolute;
-  right:0;
-  top:0;
+  position: absolute;
+  right: 0;
+  top: 0;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 1rem 0.7rem;
@@ -147,12 +132,11 @@ body {
   font-size: 0.8rem;
   outline: none;
   border: none;
-  background-color: #1c4f5a;
+  background-color: #5c6bc0;
   color: #fff;
   cursor: pointer;
 }
 
-/* Stil für Informationen zum Tageswetter */
 .day_info .content {
   display: flex;
   justify-content: space-between;
@@ -161,6 +145,45 @@ body {
 
 .day_info .content .title {
   font-weight: 600;
+}
+
+.list_content ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  margin: 3rem 0rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  border-radius: 1rem;
+  opacity: 0;
+}
+
+.list_content ul.fadeIn {
+  opacity: 1;
+}
+
+.list_content ul li {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  transition: all 0.3s ease-in;
+}
+
+.list_content ul li:hover,
+.active {
+  transform: scale(1.1);
+  background-color: #fff;
+  color: #222831;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.list_content ul li img {
+  width: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 768px) {

@@ -3,69 +3,58 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Stylesheet für die grundlegenden Stile -->
     <link rel="stylesheet" href="styles.css" />
-
-    <!-- Verknüpfung zum JavaScript-Code -->
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
     <title>Meteo App</title>
-
 </head>
 <body>
     <div class="container">
         <div class="wrapper">
             <div class="img_section">
                 <div class="default_info">
-
-                    <!-- Anzeige des aktuellen Tagesnamens -->
                     <h2 class="default_day"></h2>
-
-                    <!-- Anzeige des aktuellen Datums -->
-                    <span class="defaul_date"></span>
+                    <span class="default_date"></span>
                     <div class="icons">
-
-                        <!-- Standard-Wetterbild -->
-                        <img src="" alt="" class="weather_img_icon" />
-
-                        <!-- Anzeige der Temperatur -->
+                        <img src="">
                         <h2 class="weather_temp"></h2>
-                        
-                        <!-- Beschreibung des Wetters ???WAS IST CLOUDTEXT??? -->
-                        <h3 class="cloudtxt"></h3> 
+                        <h3 class="cloudtxt"></h3>
                     </div>
                 </div>
             </div>
             <div class="content_section">
-
-                <!-- Suchformular für die Eingabe des Standorts -->
                 <form>
                     <input type="text" placeholder="Standort suchen" class="input_field" />
                     <button type="submit" class="btn_search">Suchen</button>
                 </form>
                 <div class="day_info">
-
-                    <!-- Informationen über das aktuelle Wetter des gesuchten Ortes -->
                     <div class="content">
                         <p class="title">Standort</p>
-                        <span class="value-1"></span>
+                        <span class="location-value"></span>
                     </div>
                     <div class="content">
                         <p class="title">Temperatur</p>
-                        <span class="value-1"></span>
-                    </div>
-                    <div class="content">
-                        <p class="title">Luftfeuchtigkeit</p>
-                        <span class="value-2"></span>
+                        <span class="temperature-value"></span>
                     </div>
                     <div class="content">
                         <p class="title">Windgeschwindigkeit</p>
-                        <span class="value-2"></span>
+                        <span class="wind-speed-value"></span>
                     </div>
+                    <div class="content">
+                        <p class="title">Regenmenge</p>
+                        <span class="rain-value"></span>
+                    </div>
+                    <div class="content">
+                        <p class="title">Schneemenge</p>
+                        <span class="snowfall-value"></span>
+                    </div>
+                </div>
+                <div class="list_content">
+                    <ul>
+                        <!-- Wettervorhersage für die nächsten 7 Tage wird hier eingefügt -->
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <script defer src="script.js"></script>
 </body>
 </html>
