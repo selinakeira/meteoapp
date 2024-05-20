@@ -14,13 +14,13 @@ const listContentEl = document.querySelector(".list_content ul");
 
 // default date and location
 const days = [
-  "Sonntag",
   "Montag",
   "Dienstag",
   "Mittwoch",
   "Donnerstag",
   "Freitag",
   "Samstag",
+  "Sonntag",
 ];
 
 // display day
