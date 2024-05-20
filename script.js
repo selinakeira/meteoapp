@@ -25,7 +25,7 @@ const days = [
 
 // display day
 const day = new Date();
-const dayName = days[day.getDay()];
+const dayName = days[(day.getDay() + 6) % 7]; // Anpassung für den richtigen Wochentag
 dayEl.textContent = dayName;
 
 // Month
@@ -101,7 +101,7 @@ function displayForecast(timeData, tempData, rainData, snowData, windData) {
 
   for (let i = 0; i < 7; i++) {
     const forecastDate = new Date(timeData[i]);
-    const dayName = days[forecastDate.getDay()].slice(0, 3);
+    const dayName = days[(forecastDate.getDay() + 6) % 7].slice(0, 3); // Anpassung für den richtigen Wochentag
 
     const forecastItem = document.createElement('li');
     forecastItem.innerHTML = `
