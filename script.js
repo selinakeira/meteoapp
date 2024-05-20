@@ -8,6 +8,7 @@ const inputEl = document.querySelector(".input_field");
 const btnEl = document.querySelector(".btn_search");
 const iconContainer = document.querySelector(".icons");
 const contentSectionEl = document.querySelector(".content_section");
+const weatherImage = document.querySelector(".default_info img");
 
 const dayInfoEl = document.querySelector(".day_info");
 const listContentEl = document.querySelector(".list_content ul");
@@ -25,7 +26,7 @@ const days = [
 
 // display day
 const day = new Date();
-const dayName = days[(day.getDay() + 6) % 7]; // Anpassung für den richtigen Wochentag
+const dayName = days[day.getDay()];
 dayEl.textContent = dayName;
 
 // Month
@@ -83,6 +84,9 @@ async function fetchWeatherData(lat, lon, location) {
     document.querySelector('.wind-speed-value').textContent = `${wind_speed_10m_max[0]} km/h`;
     document.querySelector('.snowfall-value').textContent = `${snowfall_sum[0]} cm`;
 
+    // Display the weather image
+    displayWeatherImage(rain_sum[0], snowfall_sum[0], wind_speed_10m_max[0]);
+
     // Display the forecast for the next 7 days
     displayForecast(time, temperature_2m_max, rain_sum, snowfall_sum, wind_speed_10m_max);
   } catch (error) {
@@ -94,6 +98,26 @@ async function fetchWeatherData(lat, lon, location) {
   }
 }
 
+// Function to display the weather image
+function displayWeatherImage(rain, snow, wind) {
+  let imageUrl = '';
+
+  if (rain > 1) {
+    imageUrl = 'image/rain.png';
+  } else if (snow > 1) {
+    imageUrl = 'image/snow.png';
+  } else if (wind > 30) {
+    imageUrl = 'image/wind.png';
+  }
+
+  if (imageUrl) {
+    weatherImage.src = imageUrl;
+    weatherImage.style.display = 'block';
+  } else {
+    weatherImage.style.display = 'none';
+  }
+}
+
 // Function to display the forecast for the next 7 days
 function displayForecast(timeData, tempData, rainData, snowData, windData) {
   const forecastContainer = document.querySelector('.list_content ul');
@@ -101,7 +125,7 @@ function displayForecast(timeData, tempData, rainData, snowData, windData) {
 
   for (let i = 0; i < 7; i++) {
     const forecastDate = new Date(timeData[i]);
-    const dayName = days[(forecastDate.getDay() + 6) % 7].slice(0, 3); // Anpassung für den richtigen Wochentag
+    const dayName = days[forecastDate.getDay()].slice(0, 3);
 
     const forecastItem = document.createElement('li');
     forecastItem.innerHTML = `
