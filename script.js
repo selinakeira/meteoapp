@@ -103,11 +103,11 @@ function displayWeatherImage(rain, snow, wind) {
   let imageUrl = '';
 
   if (rain > 1) {
-    imageUrl = 'image/rain.png';
+    imageUrl = 'images/rain.png';
   } else if (snow > 1) {
-    imageUrl = 'image/snow.png';
+    imageUrl = 'images/snow.png';
   } else if (wind > 30) {
-    imageUrl = 'image/wind.png';
+    imageUrl = 'images/wind.png';
   }
 
   if (imageUrl) {
