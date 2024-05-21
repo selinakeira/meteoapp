@@ -68,72 +68,76 @@ async function getCoordinates(location) {
 
 // Function to fetch weather data
 async function fetchWeatherData(lat, lon, location) {
-  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,rain_sum,snowfall_sum,wind_speed_10m_max&timezone=Europe%2FBerlin`;
+  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,rain,snowfall,cloud_cover,wind_speed_10m&timezone=Europe%2FBerlin`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Extract the daily data
-    const { time, temperature_2m_max, rain_sum, snowfall_sum, wind_speed_10m_max } = data.daily;
+    // Extract the hourly data
+    const { time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m } = data.hourly;
 
-    // Display the current day's weather
+    // Display the current hour's weather
+    const currentIndex = new Date().getHours();
     document.querySelector('.location-value').textContent = location;
-    document.querySelector('.temperature-value').textContent = `${temperature_2m_max[0]} °C`;
-    document.querySelector('.rain-value').textContent = `${rain_sum[0]} mm`;
-    document.querySelector('.wind-speed-value').textContent = `${wind_speed_10m_max[0]} km/h`;
-    document.querySelector('.snowfall-value').textContent = `${snowfall_sum[0]} cm`;
+    document.querySelector('.temperature-value').textContent = `${temperature_2m[currentIndex]} °C`;
+    document.querySelector('.rain-value').textContent = `${rain[currentIndex]} mm`;
+    document.querySelector('.wind-speed-value').textContent = `${wind_speed_10m[currentIndex]} km/h`;
+    document.querySelector('.snowfall-value').textContent = `${snowfall[currentIndex]} cm`;
+    document.querySelector('.cloud-cover-value').textContent = `${cloud_cover[currentIndex]} %`;
 
     // Display the weather image
-    displayWeatherImage(rain_sum[0], snowfall_sum[0], wind_speed_10m_max[0]);
+    displayWeatherImage(rain[currentIndex], snowfall[currentIndex], wind_speed_10m[currentIndex], cloud_cover[currentIndex]);
 
     // Display the forecast for the next 7 days
-    displayForecast(time, temperature_2m_max, rain_sum, snowfall_sum, wind_speed_10m_max);
+    displayForecast(time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m);
   } catch (error) {
     console.error('Error:', error);
     document.querySelector('.temperature-value').textContent = 'Fehler';
     document.querySelector('.rain-value').textContent = 'Fehler';
     document.querySelector('.wind-speed-value').textContent = 'Fehler';
     document.querySelector('.snowfall-value').textContent = 'Fehler';
+    document.querySelector('.cloud-cover-value').textContent = 'Fehler';
   }
 }
 
 // Function to display the weather image
-function displayWeatherImage(rain, snow, wind) {
+function displayWeatherImage(rain, snow, wind, cloud) {
   let imageUrl = '';
 
   if (rain > 1) {
     imageUrl = 'images/rain.png';
   } else if (snow > 1) {
     imageUrl = 'images/snow.png';
-  } else if (wind > 30) {
-    imageUrl = 'images/wind.png';
+  } else if (cloud > 75) {
+    imageUrl = 'images/cloudy.png';
+  } else if (cloud > 50) {
+    imageUrl = 'images/clouds.png';
+  } else {
+    imageUrl = 'images/clear.png';
   }
 
-  if (imageUrl) {
-    weatherImage.src = imageUrl;
-    weatherImage.style.display = 'block';
-  } else {
-    weatherImage.style.display = 'none';
-  }
+  weatherImage.src = imageUrl;
+  weatherImage.style.display = 'block';
 }
 
 // Function to display the forecast for the next 7 days
-function displayForecast(timeData, tempData, rainData, snowData, windData) {
+function displayForecast(timeData, tempData, rainData, snowData, cloudData, windData) {
   const forecastContainer = document.querySelector('.list_content ul');
   forecastContainer.innerHTML = '';
 
   for (let i = 0; i < 7; i++) {
-    const forecastDate = new Date(timeData[i]);
+    const forecastDate = new Date(timeData[i * 24]); // Each day is represented by every 24th hour
     const dayName = days[forecastDate.getDay()].slice(0, 3);
 
     const forecastItem = document.createElement('li');
     forecastItem.innerHTML = `
       <span>${dayName}</span>
-      <span class="day_tem">${tempData[i]} °C</span>
-      <span class="day_rain">${rainData[i]} mm</span>
-      <span class="day_snow">${snowData[i]} cm</span>
-      <span class="day_wind">${windData[i]} km/h</span>
+      <span class="day_tem">${tempData[i * 24]} °C</span>
+      <span class="day_rain">${rainData[i * 24]} mm</span>
+      <span class="day_snow">${snowData[i * 24]} cm</span>
+      <span class="day_wind">${windData[i * 24]} km/h</span>
+      <span class="day_cloud">${cloudData[i * 24]} %</span>
     `;
     forecastContainer.appendChild(forecastItem);
   }
