@@ -14,7 +14,7 @@ const dayInfoEl = document.querySelector(".day_info");
 const listContentEl = document.querySelector(".list_content ul");
 
 // default date and location
-const daysFull = [
+const days = [
   "Montag",
   "Dienstag",
   "Mittwoch",
@@ -24,20 +24,10 @@ const daysFull = [
   "Sonntag",
 ];
 
-const daysShort = [
-  "MO", // Montag
-  "DI", // Dienstag
-  "MI", // Mittwoch
-  "DO", // Donnerstag
-  "FR", // Freitag
-  "SA", // Samstag
-  "SO", // Sonntag
-];
-
 // display day
 const day = new Date();
-const dayNameFull = daysFull[(day.getDay() + 6) % 7]; // Anpassung der Berechnung des Wochentags
-dayEl.textContent = dayNameFull;
+const dayName = days[(day.getDay() + 6) % 7]; // Anpassung der Berechnung des Wochentags
+dayEl.textContent = dayName;
 
 // Month
 const months = [
@@ -113,7 +103,7 @@ async function fetchWeatherData(lat, lon, location) {
     // Display the weather image
     displayWeatherImage(rain[currentIndex], snowfall[currentIndex], wind_speed_10m[currentIndex], cloud_cover[currentIndex]);
 
-    // Display the forecast for the next 4 days
+    // Display the forecast for the next 7 days
     displayForecast(time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m);
   } catch (error) {
     console.error('Error:', error);
@@ -145,34 +135,41 @@ function displayWeatherImage(rain, snow, wind, cloud) {
   weatherImage.style.display = 'block';
 }
 
-// Function to display the forecast for the next 4 days
+// Function to display the forecast for the next 7 days
 function displayForecast(timeData, tempData, rainData, snowData, cloudData, windData) {
   const forecastContainer = document.querySelector('.list_content ul');
   forecastContainer.innerHTML = '';
 
-  // Filter the forecasts to get only one forecast per day
-  const uniqueForecastDays = [];
-  const fourDaysForecast = timeData.filter((_, index) => {
-    const forecastDate = new Date(timeData[index]).getDate();
-    if (!uniqueForecastDays.includes(forecastDate)) {
-      uniqueForecastDays.push(forecastDate);
-      return true;
-    }
-    return false;
-  });
-
-  // Display forecast for the next 4 days
-  for (let i = 0; i < 4; i++) {
-    const forecastIndex = i * 24;
-    const forecastDate = new Date(timeData[forecastIndex]);
-    const dayNameShort = daysShort[forecastDate.getDay()];
+  for (let i = 0; i < 7; i++) {
+    const forecastDate = new Date(timeData[i * 24]); // Each day is represented by every 24th hour
+    const dayName = days[forecastDate.getDay()].slice(0, 3);
 
     const forecastItem = document.createElement('li');
     forecastItem.innerHTML = `
-      <img src="images/cloud.png" alt="" class="weather_img_icon" />
-      <span>${dayNameShort}</span>
-      <span class="day_tem">${tempData[forecastIndex]} °C</span>
+      <span>${dayName}</span>
+      <span class="day_tem">${tempData[i * 24]} °C</span>
+      <span class="day_rain">${rainData[i * 24]} mm</span>
+      <span class="day_snow">${snowData[i * 24]} cm</span>
+      <span class="day_wind">${windData[i * 24]} km/h</span>
+      <span class="day_cloud">${cloudData[i * 24]} %</span>
     `;
     forecastContainer.appendChild(forecastItem);
   }
 }
+
+// Get user's current location and fetch weather data
+function getUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      fetchWeatherData(latitude, longitude, 'Ihr Standort');
+    }, (error) => {
+      console.error('Error getting location:', error);
+    });
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+}
+
+// Fetch weather data for user's location when the page loads
+document.addEventListener("DOMContentLoaded", getUserLocation);
