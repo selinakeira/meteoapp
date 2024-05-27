@@ -156,20 +156,3 @@ function displayForecast(timeData, tempData, rainData, snowData, cloudData, wind
     forecastContainer.appendChild(forecastItem);
   }
 }
-
-// Get user's current location and fetch weather data
-function getUserLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      fetchWeatherData(latitude, longitude, 'Dein Standort');
-    }, (error) => {
-      console.error('Error getting location:', error);
-    });
-  } else {
-    alert('Geolocation is not supported by this browser.');
-  }
-}
-
-// Fetch weather data for user's location when the page loads
-document.addEventListener("DOMContentLoaded", getUserLocation);
