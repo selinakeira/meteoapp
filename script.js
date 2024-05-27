@@ -1,6 +1,6 @@
 "use strict";
 
-// Select elements
+// Auswahl der Elemente
 const dayEl = document.querySelector(".default_day");
 const dateEl = document.querySelector(".default_date");
 const locationNameEl = document.querySelector(".location-name"); // Standort Element
@@ -14,7 +14,7 @@ const weatherImage = document.querySelector(".default_info img");
 const dayInfoEl = document.querySelector(".day_info");
 const listContentEl = document.querySelector(".list_content ul");
 
-// default date and location
+// Standarddaten für Wochentage
 const daysFull = [
   "Montag",
   "Dienstag",
@@ -35,12 +35,12 @@ const daysShort = [
   "SO", // Sonntag
 ];
 
-// display day
+// Anzeige des aktuellen Wochentags
 const day = new Date();
 const dayNameFull = daysFull[(day.getDay() + 6) % 7]; // Anpassung der Berechnung des Wochentags
 dayEl.textContent = dayNameFull;
 
-// Month
+// Anzeige des aktuellen Datums
 const months = [
   "Januar",
   "Februar",
@@ -60,7 +60,7 @@ let date = day.getDate();
 let year = day.getFullYear();
 dateEl.textContent = `${date}. ${month} ${year}`;
 
-// Event listener for the search form
+// Ereignislistener für das Suchformular
 btnEl.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -73,7 +73,7 @@ btnEl.addEventListener("click", (e) => {
   }
 });
 
-// Use current location if no input is provided
+// Verwendung des aktuellen Standorts, wenn keine Eingabe erfolgt
 window.addEventListener('load', () => {
   if (!inputEl.value) {
     if (navigator.geolocation) {
@@ -81,7 +81,7 @@ window.addEventListener('load', () => {
         const { latitude, longitude } = position.coords;
         fetchWeatherData(latitude, longitude, "Dein Standort");
       }, error => {
-        console.error('Error getting location:', error);
+        console.error('Fehler beim Abrufen des Standorts:', error);
       });
     } else {
       alert('Geolocation wird von diesem Browser nicht unterstützt.');
@@ -89,7 +89,7 @@ window.addEventListener('load', () => {
   }
 });
 
-// Function to get coordinates for a given location
+// Funktion zum Abrufen der Koordinaten für einen gegebenen Standort
 async function getCoordinates(location) {
   try {
     const API_URL = `https://nominatim.openstreetmap.org/search?q=${location}&format=json&limit=1`;
@@ -103,11 +103,11 @@ async function getCoordinates(location) {
       alert("Standort nicht gefunden!");
     }
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Fehler:', error);
   }
 }
 
-// Function to fetch weather data
+// Funktion zum Abrufen der Wetterdaten
 async function fetchWeatherData(lat, lon, location) {
   const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,rain,snowfall,cloud_cover,wind_speed_10m&timezone=Europe%2FBerlin`;
 
@@ -115,10 +115,10 @@ async function fetchWeatherData(lat, lon, location) {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Extract the hourly data
+    // Extrahieren der stündlichen Daten
     const { time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m } = data.hourly;
 
-    // Display the current hour's weather
+    // Anzeige des Wetters der aktuellen Stunde
     const currentIndex = new Date().getHours();
     locationNameEl.textContent = location; // Standort setzen
     document.querySelector('.temperature-value').textContent = `${temperature_2m[currentIndex]} °C`;
@@ -127,13 +127,13 @@ async function fetchWeatherData(lat, lon, location) {
     document.querySelector('.snowfall-value').textContent = `${snowfall[currentIndex]} cm`;
     document.querySelector('.cloud-cover-value').textContent = `${cloud_cover[currentIndex]} %`;
 
-    // Display the weather image
+    // Anzeige des Wetterbildes
     displayWeatherImage(rain[currentIndex], snowfall[currentIndex], wind_speed_10m[currentIndex], cloud_cover[currentIndex]);
 
-    // Display the forecast for the next 4 days
+    // Anzeige der Wettervorhersage für die nächsten 4 Tage
     displayForecast(time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Fehler:', error);
     document.querySelector('.temperature-value').textContent = 'Fehler';
     document.querySelector('.rain-value').textContent = 'Fehler';
     document.querySelector('.wind-speed-value').textContent = 'Fehler';
@@ -142,7 +142,7 @@ async function fetchWeatherData(lat, lon, location) {
   }
 }
 
-// Function to display the weather image
+// Funktion zur Anzeige des Wetterbildes
 function displayWeatherImage(rain, snow, wind, cloud) {
   let imageUrl = '';
 
@@ -162,12 +162,12 @@ function displayWeatherImage(rain, snow, wind, cloud) {
   weatherImage.style.display = 'block';
 }
 
-// Function to display the forecast for the next 4 days
+// Funktion zur Anzeige der Wettervorhersage für die nächsten 4 Tage
 function displayForecast(timeData, tempData, rainData, snowData, cloudData, windData) {
   const forecastContainer = document.querySelector('.list_content ul');
   forecastContainer.innerHTML = '';
 
-  // Filter the forecasts to get only one forecast per day
+  // Filtern der Vorhersagen, um nur eine Vorhersage pro Tag zu erhalten
   const uniqueForecastDays = [];
   const fourDaysForecast = timeData.filter((_, index) => {
     const forecastDate = new Date(timeData[index]).getDate();
@@ -178,7 +178,7 @@ function displayForecast(timeData, tempData, rainData, snowData, cloudData, wind
     return false;
   });
 
-  // Display forecast for the next 4 days
+  // Anzeige der Vorhersage für die nächsten 4 Tage
   for (let i = 0; i < 4; i++) {
     const forecastIndex = i * 24;
     const forecastDate = new Date(timeData[forecastIndex]);

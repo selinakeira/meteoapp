@@ -6,6 +6,7 @@
   padding: 0;
 }
 
+/* Grundstil für den Body */
 body {
   background-color: #9fbfcf;
   height: 100vh;
@@ -15,6 +16,7 @@ body {
   font-family: "poppins";
 }
 
+/* Stil für den Container */
 .container {
   max-width: 800px;
   width: 100%;
@@ -25,12 +27,14 @@ body {
   transition: all 0.5s ease-in-out;
 }
 
+/* Stil für das Wrapper-Element */
 .wrapper {
   display: grid;
   grid-template-columns: 3fr 4fr;
   grid-gap: 1rem;
 }
 
+/* Stil für den Bildbereich */
 .img_section {
   border-radius: 25px;
   background-image: url("../img/bg.jpg");
@@ -52,13 +56,14 @@ body {
   z-index: -1;
 }
 
+/* Stil für die Standardinformationen */
 .default_info {
   padding: 1.5rem;
   text-align: center;
 }
 
 .location-name {
-  font-size: 1.2rem; /* Kleinere Schriftgröße für den Standort */
+  font-size: 1.2rem; 
   margin-top: 1rem;
 }
 
@@ -67,7 +72,7 @@ body {
   object-fit: cover;
   margin: 0 auto;
   transition: all 0.3s ease-in;
-  filter: saturate(2); /* Adjust the value to increase saturation */
+  filter: saturate(2); 
 }
 
 .default_info h2 {
@@ -100,7 +105,7 @@ body {
   }
 }
 
-/* right side content */
+/* Stil für den rechten Inhaltsbereich */
 .content_section {
   padding: 1.5rem;
 }
