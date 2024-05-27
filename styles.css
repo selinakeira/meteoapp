@@ -11,9 +11,10 @@ body {
   background-color: #9fbfcf;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: "poppins";
+  font-family: "Poppins", sans-serif;
 }
 
 /* Stil für den Container */
@@ -31,7 +32,7 @@ body {
 .wrapper {
   display: grid;
   grid-template-columns: 3fr 4fr;
-  grid-gap: 1rem;
+  grid-gap: 16px; /* 1rem in px */
 }
 
 /* Stil für den Bildbereich */
@@ -58,13 +59,13 @@ body {
 
 /* Stil für die Standardinformationen */
 .default_info {
-  padding: 1.5rem;
+  padding: 24px; /* 1.5rem in px */
   text-align: center;
 }
 
 .location-name {
-  font-size: 1.2rem; 
-  margin-top: 1rem;
+  font-size: 16px; /* 1rem in px */
+  margin-top: 16px; /* 1rem in px */
 }
 
 .default_info img {
@@ -76,16 +77,15 @@ body {
 }
 
 .default_info h2 {
-  font-size: 3rem;
+  font-size: 48px; /* 3rem in px */
 }
 
 .default_info h3 {
-  font-size: 1.5rem;
-  text-transform: capitalize;
+  font-size: 24px; /* 1.5rem in px */
 }
 
 .weather_temp {
-  font-size: 4rem;
+  font-size: 64px; /* 4rem in px */
   font-weight: 800;
 }
 
@@ -107,7 +107,7 @@ body {
 
 /* Stil für den rechten Inhaltsbereich */
 .content_section {
-  padding: 1.5rem;
+  padding: 24px; /* 1.5rem in px */
 }
 
 .content_section.fadeIn {
@@ -117,7 +117,7 @@ body {
 
 .content_section form {
   position: relative;
-  margin: 1.5rem 0;
+  margin: 24px 0; /* 1.5rem in px */
 }
 
 .content_section form input {
@@ -126,10 +126,10 @@ body {
   background: transparent;
   border: 1px solid #37474f;
   border-radius: 5px;
-  padding: 0.7rem 1rem;
+  padding: 11px 16px; /* 0.7rem 1rem in px */
   font-family: inherit;
   color: #fff;
-  font-size: 1rem;
+  font-size: 16px; /* 1rem in px */
 }
 
 .content_section form button {
@@ -138,9 +138,9 @@ body {
   top: 0;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 1rem 0.7rem;
+  padding: 16px 11px; /* 1rem 0.7rem in px */
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: 12.8px; /* 0.8rem in px */
   outline: none;
   border: none;
   background-color: #5c6bc0;
@@ -151,7 +151,7 @@ body {
 .day_info .content {
   display: flex;
   justify-content: space-between;
-  padding: 0.4rem 0;
+  padding: 6.4px 0; /* 0.4rem in px */
 }
 
 .day_info .content .title {
@@ -163,10 +163,10 @@ body {
   justify-content: space-around;
   align-items: center;
   list-style-type: none;
-  margin: 3rem 0rem;
+  margin: 48px 0; /* 3rem in px */
   padding: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  border-radius: 1rem;
+  border-radius: 16px; /* 1rem in px */
   background-color: #2e3b4e;
 }
 
@@ -175,11 +175,11 @@ body {
 }
 
 .list_content ul li {
-  padding: 1rem;
+  padding: 16px; /* 1rem in px */
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 1rem;
+  border-radius: 16px; /* 1rem in px */
   transition: all 0.3s ease-in;
   background-color: #2e3b4e;
 }
@@ -194,6 +194,25 @@ body {
   height: 50px;
   object-fit: cover;
   display: block;
+}
+
+/* Stil für den "Mehr über die Wetter App" Button */
+.more-info {
+  text-align: center;
+  margin-top: 50px; /* Abstand nach oben */
+}
+
+.btn_more_info {
+  text-decoration: none;
+  background-color: #5c6bc0;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn_more_info:hover {
+  background-color: #3949ab;
 }
 
 @media (max-width: 768px) {
