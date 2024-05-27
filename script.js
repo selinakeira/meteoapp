@@ -3,6 +3,7 @@
 // Select elements
 const dayEl = document.querySelector(".default_day");
 const dateEl = document.querySelector(".default_date");
+const locationNameEl = document.querySelector(".location-name"); // Standort Element
 const formEl = document.querySelector("form");
 const inputEl = document.querySelector(".input_field");
 const btnEl = document.querySelector(".btn_search");
@@ -119,6 +120,7 @@ async function fetchWeatherData(lat, lon, location) {
 
     // Display the current hour's weather
     const currentIndex = new Date().getHours();
+    locationNameEl.textContent = location; // Standort setzen
     document.querySelector('.location-value').textContent = location;
     document.querySelector('.temperature-value').textContent = `${temperature_2m[currentIndex]} °C`;
     document.querySelector('.rain-value').textContent = `${rain[currentIndex]} mm`;
