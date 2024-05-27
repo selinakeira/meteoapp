@@ -121,7 +121,6 @@ async function fetchWeatherData(lat, lon, location) {
     // Display the current hour's weather
     const currentIndex = new Date().getHours();
     locationNameEl.textContent = location; // Standort setzen
-    document.querySelector('.location-value').textContent = location;
     document.querySelector('.temperature-value').textContent = `${temperature_2m[currentIndex]} °C`;
     document.querySelector('.rain-value').textContent = `${rain[currentIndex]} mm`;
     document.querySelector('.wind-speed-value').textContent = `${wind_speed_10m[currentIndex]} km/h`;

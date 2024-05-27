@@ -55,15 +55,11 @@ body {
 .default_info {
   padding: 1.5rem;
   text-align: center;
-  position: relative; /* Positionierung für absolute Platzierung */
 }
 
 .location-name {
-  position: absolute; /* Absolute Platzierung des Standorts */
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Kleinere Schriftgröße für den Standort */
+  margin-top: 1rem;
 }
 
 .default_info img {
