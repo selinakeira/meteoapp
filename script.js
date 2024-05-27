@@ -26,14 +26,28 @@ const days = [
 
 // display day
 const day = new Date();
-const dayName = days[day.getDay()];
+const dayName = days[(day.getDay() + 6) % 7]; // Anpassung der Berechnung des Wochentags
 dayEl.textContent = dayName;
 
 // Month
-let month = day.toLocaleString("default", { month: "long" });
+const months = [
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember",
+];
+let month = months[day.getMonth()];
 let date = day.getDate();
 let year = day.getFullYear();
-dateEl.textContent = date + " " + month + " " + year;
+dateEl.textContent = `${date}. ${month} ${year}`;
 
 // Event listener for the search form
 btnEl.addEventListener("click", (e) => {
