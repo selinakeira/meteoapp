@@ -79,7 +79,7 @@ window.addEventListener('load', () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        fetchWeatherData(latitude, longitude, "Dein Standort");
+        getLocationName(latitude, longitude);
       }, error => {
         console.error('Fehler beim Abrufen des Standorts:', error);
       });
@@ -102,6 +102,20 @@ async function getCoordinates(location) {
     } else {
       alert("Standort nicht gefunden!");
     }
+  } catch (error) {
+    console.error('Fehler:', error);
+  }
+}
+
+// Funktion zum Abrufen des Standorts basierend auf den Koordinaten
+async function getLocationName(lat, lon) {
+  try {
+    const API_URL = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    const locationName = data.address.city || data.address.town || data.address.village || data.address.state || "Dein Standort";
+    fetchWeatherData(lat, lon, locationName);
   } catch (error) {
     console.error('Fehler:', error);
   }
@@ -147,15 +161,15 @@ function displayWeatherImage(rain, snow, wind, cloud) {
   let imageUrl = '';
 
   if (rain > 1) {
-    imageUrl = 'images/rain.png';
+    imageUrl = 'images/regen_icon.webp';
   } else if (snow > 1) {
-    imageUrl = 'images/snow.png';
+    imageUrl = 'images/schnee_icon.webp';
   } else if (cloud > 75) {
-    imageUrl = 'images/cloudy.png';
+    imageUrl = 'images/wolken_icon.webp';
   } else if (cloud > 50) {
-    imageUrl = 'images/clouds.png';
+    imageUrl = 'images/sonnewolken_icon.webp';
   } else {
-    imageUrl = 'images/clear.png';
+    imageUrl = 'images/sonne_icon.webp';
   }
 
   weatherImage.src = imageUrl;
@@ -184,9 +198,22 @@ function displayForecast(timeData, tempData, rainData, snowData, cloudData, wind
     const forecastDate = new Date(timeData[forecastIndex]);
     const dayNameShort = daysShort[forecastDate.getDay()];
 
+    let iconUrl = '';
+    if (rainData[forecastIndex] > 1) {
+      iconUrl = 'images/regen_icon.webp';
+    } else if (snowData[forecastIndex] > 1) {
+      iconUrl = 'images/schnee_icon.webp';
+    } else if (cloudData[forecastIndex] > 75) {
+      iconUrl = 'images/wolken_icon.webp';
+    } else if (cloudData[forecastIndex] > 50) {
+      iconUrl = 'images/sonnewolken_icon.webp';
+    } else {
+      iconUrl = 'images/sonne_icon.webp';
+    }
+
     const forecastItem = document.createElement('li');
     forecastItem.innerHTML = `
-      <img src="images/cloud.png" alt="" class="weather_img_icon" />
+      <img src="${iconUrl}" alt="" class="weather_img_icon" />
       <span>${dayNameShort}</span>
       <span class="day_tem">${tempData[forecastIndex]} °C</span>
     `;

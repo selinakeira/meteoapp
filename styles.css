@@ -61,16 +61,21 @@ body {
 .default_info {
   padding: 24px; /* 1.5rem in px */
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .location-name {
-  font-size: 16px; /* 1rem in px */
-  margin-top: 16px; /* 1rem in px */
+  font-size: 24px; /* 1.5rem in px */
+  margin-bottom: 8px; /* 0.5rem in px */
 }
 
 .default_info img {
-  width: 80%;
-  object-fit: cover;
+  width: 60%;
+  height: auto;
+  object-fit: contain;
   margin: 0 auto;
   transition: all 0.3s ease-in;
   filter: saturate(2); 
@@ -82,8 +87,14 @@ body {
 
 .default_info h3 {
   font-size: 24px; /* 1.5rem in px */
+  margin-top: 8px; /* 0.5rem in px */
 }
 
+.default_info .date-container {
+  margin-top: 8px; /* 0.5rem in px */
+}
+
+/* Stil für die Temperaturanzeige */
 .weather_temp {
   font-size: 64px; /* 4rem in px */
   font-weight: 800;
@@ -190,9 +201,9 @@ body {
 }
 
 .list_content ul li img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
+  width: 40px; /* kleinere Breite */
+  height: 40px; /* kleinere Höhe */
+  object-fit: contain; /* Bilder sollen das Element komplett ausfüllen, ohne abgeschnitten zu werden */
   display: block;
 }
 
