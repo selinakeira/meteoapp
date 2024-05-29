@@ -20,5 +20,7 @@ URL für die Wettervorhersage: https://api.open-meteo.com/v1/forecast?latitude=$
 
 ##KI_Einsatz
 
+ChatGPT 4.o
+
 ##Externe Quelle
 
