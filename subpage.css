@@ -14,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: "Poppins", sans-serif;
-  padding: 16px; /* Padding hinzugefügt für kleine Bildschirme */
+  padding: 16px;
 }
 
 .container {
@@ -34,53 +34,40 @@ body {
 }
 
 h1 {
-  margin-bottom: 32px; /* Abstand zwischen der Überschrift und den Bildern */
+  margin-bottom: 32px;
 }
 
 .team-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
   gap: 32px;
 }
 
-.team-photos {
+.team-member {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  flex-wrap: wrap; /* Zeilenumbruch für kleine Bildschirme */
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
 }
 
 .circle {
-  width: 200px; /* Größere Kreise */
-  height: 200px; /* Größere Kreise */
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .circle img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.team-names,
-.team-descriptions {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  flex-wrap: wrap; /* Zeilenumbruch für kleine Bildschirme */
-}
-
-.team-names h3,
-.team-descriptions p {
-  width: 30%;
-  text-align: center;
 }
 
 h3 {
@@ -92,6 +79,7 @@ h3 {
 p {
   font-size: 16px;
   margin: 0 0 32px 0;
+  text-align: center;
 }
 
 .btn_more_info {
@@ -110,44 +98,42 @@ p {
 
 @media (max-width: 768px) {
   .container {
-    padding: 16px; /* Weniger Padding für kleine Bildschirme */
+    padding: 16px;
   }
 
   .content_section {
-    padding: 16px; /* Weniger Padding für kleine Bildschirme */
+    padding: 16px;
   }
 
   h1 {
-    margin-bottom: 24px; /* Weniger Abstand für kleine Bildschirme */
+    margin-bottom: 24px;
   }
 
-  .team-photos,
-  .team-names,
-  .team-descriptions {
+  .team-container {
     flex-direction: column;
+    gap: 16px;
   }
 
-  .team-names h3,
-  .team-descriptions p {
+  .team-member {
     width: 100%;
   }
 
   .circle {
-    width: 160px; /* Größere Kreise für kleine Bildschirme */
+    width: 160px;
     height: 160px;
     margin-bottom: 16px;
   }
 
   h3 {
-    font-size: 20px; /* Kleinere Schriftgröße für Überschriften */
+    font-size: 20px;
   }
 
   p {
-    font-size: 14px; /* Kleinere Schriftgröße für Beschreibungen */
+    font-size: 14px;
     margin-bottom: 16px;
   }
 
   .btn_more_info {
-    margin-top: 24px; /* Weniger Abstand zum Button */
+    margin-top: 24px;
   }
 }
