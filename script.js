@@ -60,7 +60,7 @@ let date = day.getDate();
 let year = day.getFullYear();
 dateEl.textContent = `${date}. ${month} ${year}`;
 
-// Ereignislistener für das Suchformular
+// Eventlistener für das Suchformular
 btnEl.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -135,16 +135,23 @@ async function fetchWeatherData(lat, lon, location) {
     // Anzeige des Wetters der aktuellen Stunde
     const currentIndex = new Date().getHours();
     locationNameEl.textContent = location; // Standort setzen
-    document.querySelector('.temperature-value').textContent = `${temperature_2m[currentIndex]} °C`;
-    document.querySelector('.rain-value').textContent = `${rain[currentIndex]} mm`;
-    document.querySelector('.wind-speed-value').textContent = `${wind_speed_10m[currentIndex]} km/h`;
-    document.querySelector('.snowfall-value').textContent = `${snowfall[currentIndex]} cm`;
-    document.querySelector('.cloud-cover-value').textContent = `${cloud_cover[currentIndex]} %`;
+    const currentTemperature = temperature_2m[currentIndex];
+    const currentRain = rain[currentIndex];
+    const currentWindSpeed = wind_speed_10m[currentIndex];
+    const currentSnowfall = snowfall[currentIndex];
+    const currentCloudCover = cloud_cover[currentIndex];
+    document.querySelector('.temperature-value').textContent = `${currentTemperature} °C`;
+    document.querySelector('.rain-value').textContent = `${currentRain} mm`;
+    document.querySelector('.wind-speed-value').textContent = `${currentWindSpeed} km/h`;
+    document.querySelector('.snowfall-value').textContent = `${currentSnowfall} cm`;
+    document.querySelector('.cloud-cover-value').textContent = `${currentCloudCover} %`;
 
     // Anzeige des Wetterbildes
-    displayWeatherImage(rain[currentIndex], snowfall[currentIndex], wind_speed_10m[currentIndex], cloud_cover[currentIndex]);
+    displayWeatherImage(currentRain, currentSnowfall, currentWindSpeed, currentCloudCover);
 
     // Anzeige der Wettervorhersage für die nächsten 4 Tage
+    console.log(time)
+    console.log(temperature_2m)
     displayForecast(time, temperature_2m, rain, snowfall, cloud_cover, wind_speed_10m);
   } catch (error) {
     console.error('Fehler:', error);
@@ -160,7 +167,9 @@ async function fetchWeatherData(lat, lon, location) {
 function displayWeatherImage(rain, snow, wind, cloud) {
   let imageUrl = '';
 
-  if (rain > 1) {
+  if (wind >= 50) {
+    imageUrl = 'images/wind_icon.webp';
+  } else if (rain > 1) {
     imageUrl = 'images/regen_icon.webp';
   } else if (snow > 1) {
     imageUrl = 'images/schnee_icon.webp';
@@ -171,6 +180,7 @@ function displayWeatherImage(rain, snow, wind, cloud) {
   } else {
     imageUrl = 'images/sonne_icon.webp';
   }
+  
 
   weatherImage.src = imageUrl;
   weatherImage.style.display = 'block';
@@ -181,25 +191,22 @@ function displayForecast(timeData, tempData, rainData, snowData, cloudData, wind
   const forecastContainer = document.querySelector('.list_content ul');
   forecastContainer.innerHTML = '';
 
-  // Filtern der Vorhersagen, um nur eine Vorhersage pro Tag zu erhalten
-  const uniqueForecastDays = [];
-  const fourDaysForecast = timeData.filter((_, index) => {
-    const forecastDate = new Date(timeData[index]).getDate();
-    if (!uniqueForecastDays.includes(forecastDate)) {
-      uniqueForecastDays.push(forecastDate);
-      return true;
-    }
-    return false;
-  });
-
   // Anzeige der Vorhersage für die nächsten 4 Tage
   for (let i = 0; i < 4; i++) {
     const forecastIndex = i * 24;
     const forecastDate = new Date(timeData[forecastIndex]);
     const dayNameShort = daysShort[forecastDate.getDay()];
 
+    let averageTemp = 0;
+    for (let j = 0; j < 24; j++) {
+      averageTemp += tempData[forecastIndex + j];
+    }
+    averageTemp = Math.round((averageTemp / 24) * 10) / 10;
+
     let iconUrl = '';
-    if (rainData[forecastIndex] > 1) {
+    if (windData[forecastIndex] >= 62) {
+      iconUrl = 'images/wind_icon.webp';
+    } else if (rainData[forecastIndex] > 1) {
       iconUrl = 'images/regen_icon.webp';
     } else if (snowData[forecastIndex] > 1) {
       iconUrl = 'images/schnee_icon.webp';
@@ -215,7 +222,7 @@ function displayForecast(timeData, tempData, rainData, snowData, cloudData, wind
     forecastItem.innerHTML = `
       <img src="${iconUrl}" alt="" class="weather_img_icon" />
       <span>${dayNameShort}</span>
-      <span class="day_tem">${tempData[forecastIndex]} °C</span>
+      <span class="day_tem">${averageTemp} °C</span>
     `;
     forecastContainer.appendChild(forecastItem);
   }

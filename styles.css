@@ -9,12 +9,13 @@
 /* Grundstil für den Body */
 body {
   background-color: #9fbfcf;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: "Poppins", sans-serif;
+  padding: 16px;
 }
 
 /* Stil für den Container */
@@ -38,28 +39,13 @@ body {
 /* Stil für den Bildbereich */
 .img_section {
   border-radius: 25px;
-  background-image: url("../img/bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  transform: scale(1.03) perspective(200px);
-}
-
-.img_section::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
   background: linear-gradient(135deg, #5c6bc0 10%, #0d47a1 100%);
-  opacity: 1;
-  border-radius: 25px;
-  z-index: -1;
+  position: relative;
 }
 
 /* Stil für die Standardinformationen */
 .default_info {
-  padding: 24px; /* 1.5rem in px */
+  padding: 24px; 
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -68,8 +54,8 @@ body {
 }
 
 .location-name {
-  font-size: 24px; /* 1.5rem in px */
-  margin-bottom: 8px; /* 0.5rem in px */
+  font-size: 24px; 
+  margin-bottom: 8px; 
 }
 
 .default_info img {
@@ -78,47 +64,30 @@ body {
   object-fit: contain;
   margin: 0 auto;
   transition: all 0.3s ease-in;
-  filter: saturate(2); 
 }
 
 .default_info h2 {
-  font-size: 48px; /* 3rem in px */
+  font-size: 48px; 
 }
 
 .default_info h3 {
-  font-size: 24px; /* 1.5rem in px */
-  margin-top: 8px; /* 0.5rem in px */
+  font-size: 24px;
+  margin-top: 8px; 
 }
 
 .default_info .date-container {
-  margin-top: 8px; /* 0.5rem in px */
+  margin-top: 8px; 
 }
 
 /* Stil für die Temperaturanzeige */
 .weather_temp {
-  font-size: 64px; /* 4rem in px */
+  font-size: 64px; 
   font-weight: 800;
-}
-
-.icons {
-  opacity: 0.6;
-}
-
-.icons.fadeIn {
-  animation: 0.5s fadeIn forwards;
-  animation-delay: 0.7s;
-}
-
-@keyframes fadeIn {
-  to {
-    transition: all 0.5s ease-in;
-    opacity: 1;
-  }
 }
 
 /* Stil für den rechten Inhaltsbereich */
 .content_section {
-  padding: 24px; /* 1.5rem in px */
+  padding: 24px; 
 }
 
 .content_section.fadeIn {
@@ -128,30 +97,34 @@ body {
 
 .content_section form {
   position: relative;
-  margin: 24px 0; /* 1.5rem in px */
+  margin: 24px 0; 
+  display: grid;
+  grid-template-columns: 70% 30%;
 }
 
 .content_section form input {
-  width: 84%;
+  height: 48px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   outline: none;
   background: transparent;
   border: 1px solid #37474f;
-  border-radius: 5px;
-  padding: 11px 16px; /* 0.7rem 1rem in px */
+  border-right: none;
+  padding: 11px 16px; 
   font-family: inherit;
   color: #fff;
-  font-size: 16px; /* 1rem in px */
+  font-size: 16px; 
 }
 
 .content_section form button {
-  position: absolute;
-  right: 0;
-  top: 0;
+  height: 48px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  padding: 16px 11px; /* 1rem 0.7rem in px */
+  padding: 11px 16px; 
   font-family: inherit;
-  font-size: 12.8px; /* 0.8rem in px */
+  font-size: 12.8px;
   outline: none;
   border: none;
   background-color: #5c6bc0;
@@ -162,7 +135,7 @@ body {
 .day_info .content {
   display: flex;
   justify-content: space-between;
-  padding: 6.4px 0; /* 0.4rem in px */
+  padding: 6.4px 0; 
 }
 
 .day_info .content .title {
@@ -174,10 +147,10 @@ body {
   justify-content: space-around;
   align-items: center;
   list-style-type: none;
-  margin: 48px 0; /* 3rem in px */
+  margin: 48px 0; 
   padding: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  border-radius: 16px; /* 1rem in px */
+  border-radius: 16px; 
   background-color: #2e3b4e;
 }
 
@@ -186,11 +159,11 @@ body {
 }
 
 .list_content ul li {
-  padding: 16px; /* 1rem in px */
+  padding: 16px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 16px; /* 1rem in px */
+  border-radius: 16px; 
   transition: all 0.3s ease-in;
   background-color: #2e3b4e;
 }
@@ -201,16 +174,16 @@ body {
 }
 
 .list_content ul li img {
-  width: 40px; /* kleinere Breite */
-  height: 40px; /* kleinere Höhe */
-  object-fit: contain; /* Bilder sollen das Element komplett ausfüllen, ohne abgeschnitten zu werden */
+  width: 40px; 
+  height: 40px; 
+  object-fit: contain; 
   display: block;
 }
 
 /* Stil für den "Mehr über die Wetter App" Button */
 .more-info {
   text-align: center;
-  margin-top: 50px; /* Abstand nach oben */
+  margin-top: 50px; 
 }
 
 .btn_more_info {
@@ -228,6 +201,6 @@ body {
 
 @media (max-width: 768px) {
   .wrapper {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }
